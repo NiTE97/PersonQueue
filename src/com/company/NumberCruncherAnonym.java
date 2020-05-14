@@ -1,13 +1,50 @@
 package com.company;
 
+import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class NumberCruncherAnonym {
-    float[] arr;
+    private float[] arr;
+
+    public NumberCruncherAnonym(float [] values){
+        setArray(values);
+    }
+
+    public void setArray(float [] values){
+        this.arr = values;
+    }
+
+
+    public float[] getNumbers() {
+        return arr;
+    }
+
+    public void crunch(String [] operations) {
+        for (String operation : operations) {
+
+            switch (operation) {
+                case "sum":
+                    sum(arr);
+                    break;
+                case "swirl":
+                    swirl(arr);
+                    break;
+                case "divide":
+                    divide(arr);
+                    break;
+                case "substract":
+                    substract(arr);
+                    break;
+                case "average":
+                    average(arr);
+                    break;
+            }
+        }
+    }
 
 
 
-    public float[] sum(float[] values) {
+    public void sum(float[] values) {
         CrunchOperation co = new CrunchOperation() {
             @Override
             public void crunch(float[] values) {
@@ -17,33 +54,44 @@ public class NumberCruncherAnonym {
                     temp[i + 1] = values[i] + values[i + 1];
                 }
                 values = temp;
-                arr = values;
+                setArray(values);
             }
         };
         co.crunch(values);
-        return arr;
-
     }
 
-    float[] swirl(float[] values) {
+    public void swirl(float[] values) {
         CrunchOperation co = new CrunchOperation() {
             @Override
             public void crunch(float[] values) {
+                float [] tempArr = new float[values.length];
+
+                {
+                    int i = 0;
+                    while (i < values.length) {
+                        tempArr[i] = values[i];
+                        i++;
+                    }
+                }
+
                 for (int i = 0; i < values.length; i++) {
                     int randomNum = ThreadLocalRandom.current().nextInt(0, values.length);
                     int randomNum2 = ThreadLocalRandom.current().nextInt(0, values.length);
                     float temp = values[randomNum];
                     values[randomNum] = values[randomNum2];
                     values[randomNum2] = temp;
-                    arr = values;
+                }
+                if(Arrays.equals(tempArr, values)){
+                    crunch(values);
                 }
             }
         };
         co.crunch(values);
-        return arr;
+        setArray(values);
+
     }
 
-    float[] divide(float[] values) {
+    void divide(float[] values) {
         CrunchOperation co = new CrunchOperation() {
             @Override
             public void crunch(float[] values) {
@@ -74,15 +122,16 @@ public class NumberCruncherAnonym {
                         p--;
                     }
                 }
-                arr = values;
+                setArray(values);
 
             }
         };
         co.crunch(values);
-        return arr;
+        setArray(arr);
+
     }
 
-    float[] substract(float[] values) {
+    void substract(float[] values) {
         CrunchOperation co = new CrunchOperation() {
             @Override
             public void crunch(float[] values) {
@@ -96,10 +145,9 @@ public class NumberCruncherAnonym {
             }
         };
         co.crunch(values);
-        return arr;
     }
 
-    float[] average(float[] values) {
+    void average(float[] values) {
         CrunchOperation co = new CrunchOperation() {
             @Override
             public void crunch(float[] values) {
@@ -109,15 +157,9 @@ public class NumberCruncherAnonym {
                 }
                 temp = temp / values.length;
                 values[Methoden.findMax(values)] = temp;
-                arr = values;
+                setArray(values);
             }
         };
         co.crunch(values);
-        return arr;
     }
-
-
-
-
 }
-
