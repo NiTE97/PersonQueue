@@ -32,8 +32,8 @@ public class NumberCruncherAnonym {
                 case "divide":
                     divide(arr);
                     break;
-                case "substract":
-                    substract(arr);
+                case "subtract":
+                    subtract(arr);
                     break;
                 case "average":
                     average(arr);
@@ -131,7 +131,7 @@ public class NumberCruncherAnonym {
 
     }
 
-    void substract(float[] values) {
+    void subtract(float[] values) {
         CrunchOperation co = new CrunchOperation() {
             @Override
             public void crunch(float[] values) {

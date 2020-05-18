@@ -78,20 +78,20 @@ public class CrunchOperationTest {
     }
 
     @Test
-    public void substractTest1() {
+    public void subtractTest1() {
         float[] arr = {2, 4, 6, 8};
         NumberCruncherTopLevel nc = new NumberCruncherTopLevel(arr);
-        nc.substract(arr);
+        nc.subtract(arr);
         float[] actual = nc.getNumbers();
         float[] expected = {2, -2, -2, -2};
         assertArrayEquals(expected, actual, (float) 0.0);
     }
 
     @Test
-    public void substractTest2() {
+    public void subtractTest2() {
         float[] arr = {1, 2, 3, 4};
         NumberCruncherTopLevel nc = new NumberCruncherTopLevel(arr);
-        nc.substract(arr);
+        nc.subtract(arr);
         float[] actual = nc.getNumbers();
         float[] expected = {1, -1, -1, -1};
         assertArrayEquals(expected, actual, (float) 0.0);

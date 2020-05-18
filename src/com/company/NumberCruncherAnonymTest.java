@@ -79,20 +79,20 @@ public class NumberCruncherAnonymTest {
     }
 
     @Test
-    public void substractTest1() {
+    public void subtractTest1() {
         float[] arr = {2, 4, 6, 8};
         NumberCruncherAnonym nc = new NumberCruncherAnonym(arr);
-        nc.substract(arr);
+        nc.subtract(arr);
         float[] actual = nc.getNumbers();
         float[] expected = {2, -2, -2, -2};
         assertArrayEquals(actual, expected, (float) 0.0);
     }
 
     @Test
-    public void substractTest2() {
+    public void subtractTest2() {
         float[] arr = {1, 2, 3, 4};
         NumberCruncherAnonym nc = new NumberCruncherAnonym(arr);
-        nc.substract(arr);
+        nc.subtract(arr);
         float[] actual = nc.getNumbers();
         float[] expected = {1, -1, -1, -1};
         assertArrayEquals(actual, expected, (float) 0.0);
