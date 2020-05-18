@@ -14,6 +14,6 @@ public class Sum extends NumberCruncherTopLevel implements CrunchOperation {
             temp[i + 1] = values[i] + values[i + 1];
         }
         values = temp;
-        setArr(values);
+        setNewArr(values);
     }
 }

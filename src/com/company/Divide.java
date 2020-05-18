@@ -9,6 +9,8 @@ public class Divide extends NumberCruncherTopLevel implements CrunchOperation {
     @Override
     public void crunch(float[] values) {
         float[] temp = new float[values.length];
+        float[] temp2 = new float[values.length];
+
         int max;
         int p = values.length - 1;
 
@@ -21,20 +23,27 @@ public class Divide extends NumberCruncherTopLevel implements CrunchOperation {
                 i++;
             }
         }
-
+        //temp2 array mit values Fuellen
+        {
+            int i = 0;
+            while (i < values.length) {
+                temp2[i] = values[i];
+                i++;
+            }
+        }
 
         Methoden.bubbleSort(temp);
 
         for (int i = 0; i < values.length - 1; i++) {
             if (temp[i] != 0) {
-                max = Methoden.findNumber(values, temp[p]);
+                max = Methoden.findNumber(temp2, temp[p]);
                 temp[p] = temp[p] / temp[i];
-                values[max] = temp[p];
+                temp2[max] = temp[p];
                 temp[p] = 0;
                 temp[i] = 0;
                 p--;
             }
         }
-        setArr(values);
+        setNewArr(temp2);
     }
 }

@@ -5,6 +5,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class NumberCruncherAnonym {
     private float[] arr;
+    private float[] edited;
+
+    public void deleteArray(){
+        edited = null;
+    }
 
     public NumberCruncherAnonym(float [] values){
         setArray(values);
@@ -14,32 +19,49 @@ public class NumberCruncherAnonym {
         this.arr = values;
     }
 
+    public void setNewArray(float [] values){
+        this.edited = values;
+    }
+
+    public float [] getNewNumbers(){
+        return edited;
+    }
+
 
     public float[] getNumbers() {
         return arr;
     }
 
     public void crunch(String [] operations) {
+        float [] tempArr;
+
         for (String operation : operations) {
 
+            if (edited != null){
+                tempArr = edited;
+            }else{
+                tempArr = arr;
+            }
+
             switch (operation) {
-                case "sum":
-                    sum(arr);
+                case "sum" :
+                    sum(tempArr);
                     break;
                 case "swirl":
-                    swirl(arr);
+                    swirl(tempArr);
                     break;
                 case "divide":
-                    divide(arr);
+                    divide(tempArr);
                     break;
                 case "subtract":
-                    subtract(arr);
+                    subtract(tempArr);
                     break;
                 case "average":
-                    average(arr);
+                    average(tempArr);
                     break;
             }
         }
+        edited = getNewNumbers();
     }
 
 
@@ -54,7 +76,7 @@ public class NumberCruncherAnonym {
                     temp[i + 1] = values[i] + values[i + 1];
                 }
                 values = temp;
-                setArray(values);
+                setNewArray(values);
             }
         };
         co.crunch(values);
@@ -73,13 +95,13 @@ public class NumberCruncherAnonym {
                         i++;
                     }
                 }
-
                 for (int i = 0; i < values.length; i++) {
                     int randomNum = ThreadLocalRandom.current().nextInt(0, values.length);
                     int randomNum2 = ThreadLocalRandom.current().nextInt(0, values.length);
-                    float temp = values[randomNum];
-                    values[randomNum] = values[randomNum2];
-                    values[randomNum2] = temp;
+                    float temp = tempArr[randomNum];
+                    tempArr[randomNum] = tempArr[randomNum2];
+                    tempArr[randomNum2] = temp;
+                    setNewArray(tempArr);
                 }
                 if(Arrays.equals(tempArr, values)){
                     crunch(values);
@@ -87,7 +109,6 @@ public class NumberCruncherAnonym {
             }
         };
         co.crunch(values);
-        setArray(values);
 
     }
 
@@ -96,11 +117,13 @@ public class NumberCruncherAnonym {
             @Override
             public void crunch(float[] values) {
                 float[] temp = new float[values.length];
+                float[] temp2 = new float[values.length];
+
                 int max;
                 int p = values.length - 1;
 
 
-                //temp Array mit arr Fuellen
+                //temp array mit values Fuellen
                 {
                     int i = 0;
                     while (i < values.length) {
@@ -108,26 +131,32 @@ public class NumberCruncherAnonym {
                         i++;
                     }
                 }
-
+                //temp2 array mit values Fuellen
+                {
+                    int i = 0;
+                    while (i < values.length) {
+                        temp2[i] = values[i];
+                        i++;
+                    }
+                }
 
                 Methoden.bubbleSort(temp);
 
                 for (int i = 0; i < values.length - 1; i++) {
                     if (temp[i] != 0) {
-                        max = Methoden.findNumber(values, temp[p]);
+                        max = Methoden.findNumber(temp2, temp[p]);
                         temp[p] = temp[p] / temp[i];
-                        values[max] = temp[p];
+                        temp2[max] = temp[p];
                         temp[p] = 0;
                         temp[i] = 0;
                         p--;
                     }
                 }
-                setArray(values);
+                setNewArray(temp2);
 
             }
         };
         co.crunch(values);
-        setArray(arr);
 
     }
 
@@ -141,7 +170,7 @@ public class NumberCruncherAnonym {
                     temp[i + 1] = values[i] - values[i + 1];
                 }
                 values = temp;
-                arr = values;
+                setNewArray(values);
             }
         };
         co.crunch(values);
@@ -152,12 +181,22 @@ public class NumberCruncherAnonym {
             @Override
             public void crunch(float[] values) {
                 float temp = 0;
+                float [] tempArr = new float[values.length];
+
+                {
+                    int i = 0;
+                    while (i < values.length) {
+                        tempArr[i] = values[i];
+                        i++;
+                    }
+                }
+
                 for (float v : values) {
                     temp += v;
                 }
                 temp = temp / values.length;
-                values[Methoden.findMax(values)] = temp;
-                setArray(values);
+                tempArr[Methoden.findMax(values)] = temp;
+                setNewArray(tempArr);
             }
         };
         co.crunch(values);

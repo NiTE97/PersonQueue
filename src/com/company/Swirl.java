@@ -23,10 +23,10 @@ public class Swirl extends NumberCruncherTopLevel implements CrunchOperation {
         for (int i = 0; i < values.length; i++) {
             int randomNum = ThreadLocalRandom.current().nextInt(0, values.length);
             int randomNum2 = ThreadLocalRandom.current().nextInt(0, values.length);
-            float temp = values[randomNum];
-            values[randomNum] = values[randomNum2];
-            values[randomNum2] = temp;
-            setArr(values);
+            float temp = tempArr[randomNum];
+            tempArr[randomNum] = tempArr[randomNum2];
+            tempArr[randomNum2] = temp;
+            setNewArr(tempArr);
         }
         if(Arrays.equals(tempArr, values)){
             crunch(values);

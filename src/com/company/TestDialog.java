@@ -16,8 +16,9 @@ public class TestDialog {
     private static final int AVERAGE = 5;
     private static final int CRUNCH = 6;
     private static final int ENDE = 0;
-    private static final int ANLEGEN= 7;
-    private static final int TOPLEVEL= 11;
+    private static final int ANLEGEN = 7;
+    private static final int ANZEIGEN = 8;
+    private static final int TOPLEVEL = 11;
     private static final int ANONYM = 12;
     private static int verfahren = 0;
 
@@ -41,10 +42,10 @@ public class TestDialog {
         while (funktion != ENDE) {
             try {
                 funktion = einlesenFunktion();
-                if(verfahren == 0 && funktion != 7){
+                if (verfahren == 0 && funktion != 7) {
                     System.out.println("Bitte erst das Verfahren angeben!");
                     ausfuehrenFunktion(7);
-                }else {
+                } else {
                     ausfuehrenFunktion(funktion);
                 }
             } catch (java.util.InputMismatchException e) {
@@ -69,6 +70,7 @@ public class TestDialog {
                 AVERAGE + ": Average Funktion benutzen" + "\n" +
                 CRUNCH + ": Mehrere Funktionen benutzen" + "\n" +
                 ANLEGEN + ": Verfahren wählen" + "\n" +
+                ANZEIGEN + ": Das aktuelle Array anzeigen" + "\n" +
                 ENDE + ": Programm beenden" + "\n";
         System.out.println(dialog);
         eingabe = input.nextInt();
@@ -89,7 +91,7 @@ public class TestDialog {
                 Validator.check(size <= 0, MSG_NEGATIV);
                 values = new float[size];
                 System.out.println("Bitte geben Sie nacheinander die einzelnen Zahlen ein: ");
-                for(int i = 0; i < size; i++){
+                for (int i = 0; i < size; i++) {
                     values[i] = input.nextInt();
                     input.nextLine();
                     System.out.println(values[i] + " wurde hinzugefügt");
@@ -101,78 +103,100 @@ public class TestDialog {
                 }
                 break;
             case SUM:
-                if(verfahren == TOPLEVEL) {
+                if (verfahren == TOPLEVEL) {
                     numberCrunsherTop.sum(values);
-                    System.out.println(Arrays.toString(numberCrunsherTop.getNumbers()));
-                }else if(verfahren == ANONYM){
+                    System.out.println(Arrays.toString(numberCrunsherTop.getNewNumbers()));
+                    numberCrunsherTop.deleteArray();
+                } else if (verfahren == ANONYM) {
                     numberCrunsherAno.sum(values);
-                    System.out.println(Arrays.toString(numberCrunsherAno.getNumbers()));
-                }else{
+                    System.out.println(Arrays.toString(numberCrunsherAno.getNewNumbers()));
+                    numberCrunsherAno.deleteArray();
+                } else {
                     System.out.println("Es wurde noch kein Verfahren gewählt!");
                 }
                 break;
             case SWIRL:
-                if(verfahren == TOPLEVEL) {
+                if (verfahren == TOPLEVEL) {
                     numberCrunsherTop.swirl(values);
-                    System.out.println(Arrays.toString(numberCrunsherTop.getNumbers()));
-                }else if(verfahren == ANONYM){
+                    System.out.println(Arrays.toString(numberCrunsherTop.getNewNumbers()));
+                    numberCrunsherTop.deleteArray();
+                } else if (verfahren == ANONYM) {
                     numberCrunsherAno.swirl(values);
-                    System.out.println(Arrays.toString(numberCrunsherAno.getNumbers()));
-                }else{
+                    System.out.println(Arrays.toString(numberCrunsherAno.getNewNumbers()));
+                    numberCrunsherAno.deleteArray();
+                } else {
                     System.out.println("Es wurde noch kein Verfahren gewählt!");
                 }
                 break;
             case DIVIDE:
-                if(verfahren == TOPLEVEL) {
+                if (verfahren == TOPLEVEL) {
                     numberCrunsherTop.divide(values);
-                    System.out.println(Arrays.toString(numberCrunsherTop.getNumbers()));
-                }else if(verfahren == ANONYM){
+                    System.out.println(Arrays.toString(numberCrunsherTop.getNewNumbers()));
+                    numberCrunsherTop.deleteArray();
+                } else if (verfahren == ANONYM) {
                     numberCrunsherAno.divide(values);
-                    System.out.println(Arrays.toString(numberCrunsherAno.getNumbers()));
-                }else{
+                    System.out.println(Arrays.toString(numberCrunsherAno.getNewNumbers()));
+                    numberCrunsherAno.deleteArray();
+                } else {
                     System.out.println("Es wurde noch kein Verfahren gewählt!");
                 }
                 break;
             case SUBTRACT:
-                if(verfahren == TOPLEVEL) {
+                if (verfahren == TOPLEVEL) {
                     numberCrunsherTop.subtract(values);
-                    System.out.println(Arrays.toString(numberCrunsherTop.getNumbers()));
-                }else if(verfahren == ANONYM){
+                    System.out.println(Arrays.toString(numberCrunsherTop.getNewNumbers()));
+                    numberCrunsherTop.deleteArray();
+                } else if (verfahren == ANONYM) {
                     numberCrunsherAno.subtract(values);
-                    System.out.println(Arrays.toString(numberCrunsherAno.getNumbers()));
-                }else{
+                    System.out.println(Arrays.toString(numberCrunsherAno.getNewNumbers()));
+                    numberCrunsherAno.deleteArray();
+                } else {
                     System.out.println("Es wurde noch kein Verfahren gewählt!");
                 }
                 break;
             case AVERAGE:
-                if(verfahren == TOPLEVEL) {
+                if (verfahren == TOPLEVEL) {
                     numberCrunsherTop.average(values);
-                    System.out.println(Arrays.toString(numberCrunsherTop.getNumbers()));
-                }else if(verfahren == ANONYM){
+                    System.out.println(Arrays.toString(numberCrunsherTop.getNewNumbers()));
+                    numberCrunsherTop.deleteArray();
+                } else if (verfahren == ANONYM) {
                     numberCrunsherAno.average(values);
-                    System.out.println(Arrays.toString(numberCrunsherAno.getNumbers()));
-                }else{
+                    System.out.println(Arrays.toString(numberCrunsherAno.getNewNumbers()));
+                    numberCrunsherAno.deleteArray();
+                } else {
                     System.out.println("Es wurde noch kein Verfahren gewählt!");
                 }
                 break;
             case CRUNCH:
-                String [] operations;
+                String[] operations;
                 int opSize;
                 System.out.println("Wie viele Funktionen soll es hintereinander geben?");
                 opSize = input.nextInt();
                 input.nextLine();
                 operations = new String[opSize];
-                System.out.println("Geben Sie nacheinander die Funktionen ein: ");
-                for (int i = 0; i < opSize;i++){
-                    operations[i] = input.nextLine().toLowerCase();
+                System.out.println("Geben Sie nacheinander die Funktionen ein: " + "\n(sum, swirl, divide, subtract, average)");
+                for (int i = 0; i < opSize; i++) {
+                    operations[i] = input.nextLine().toLowerCase().trim();
                 }
-                if(verfahren == TOPLEVEL) {
+                if (verfahren == TOPLEVEL) {
                     numberCrunsherTop.crunch(operations);
-                    System.out.println(Arrays.toString(numberCrunsherTop.getNumbers()));
-                }else if(verfahren == ANONYM){
+                    System.out.println(Arrays.toString(numberCrunsherTop.getNewNumbers()));
+                    numberCrunsherTop.deleteArray();
+                } else if (verfahren == ANONYM) {
                     numberCrunsherAno.crunch(operations);
+                    System.out.println(Arrays.toString(numberCrunsherAno.getNewNumbers()));
+                    numberCrunsherAno.deleteArray();
+                } else {
+                    System.out.println("Es wurde noch kein Verfahren gewählt!");
+                }
+                break;
+            case ANZEIGEN:
+                if (verfahren == TOPLEVEL) {
+                    System.out.println(Arrays.toString(numberCrunsherTop.getNumbers()));
+                    numberCrunsherTop.deleteArray();
+                } else if (verfahren == ANONYM) {
                     System.out.println(Arrays.toString(numberCrunsherAno.getNumbers()));
-                }else{
+                } else {
                     System.out.println("Es wurde noch kein Verfahren gewählt!");
                 }
                 break;
