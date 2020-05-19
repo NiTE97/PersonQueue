@@ -1,11 +1,15 @@
-package com.company;
-
 public class Divide extends NumberCruncherTopLevel implements CrunchOperation {
-
+/**
+ * Konstruktor der auf super zugreift
+ * @param values    -   das zu bearbeitende Array
+ */
     public Divide(float[] values) {
         super(values);
     }
-
+/**
+ * crunch Methode die das Interface implementiert
+ * @param values    -   das zu bearbeitende Array
+ */
     @Override
     public void crunch(float[] values) {
         float[] temp = new float[values.length];

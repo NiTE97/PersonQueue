@@ -1,14 +1,18 @@
-package com.company;
-
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Swirl extends NumberCruncherTopLevel implements CrunchOperation {
-
+/**
+ * Konstruktor der auf super zugreift
+ * @param values    -   das zu bearbeitende Array
+ */
     public Swirl(float[] values) {
         super(values);
     }
-
+/**
+ * crunch Methode die das Interface implementiert
+ * @param values    -   das zu bearbeitende Array
+ */
     @Override
     public void crunch(float[] values) {
         float [] tempArr = new float[values.length];

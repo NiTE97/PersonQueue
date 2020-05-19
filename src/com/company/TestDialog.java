@@ -1,4 +1,4 @@
-package com.company;
+ 
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -98,8 +98,12 @@ public class TestDialog {
                 }
                 System.out.println(Arrays.toString(values));
                 switch (verfahren) {
-                    case TOPLEVEL -> numberCrunsherTop = new NumberCruncherTopLevel(values);
-                    case ANONYM -> numberCrunsherAno = new NumberCruncherAnonym(values);
+                    case TOPLEVEL:
+                    numberCrunsherTop = new NumberCruncherTopLevel(values);
+                    break;
+                    case ANONYM:
+                    numberCrunsherAno = new NumberCruncherAnonym(values);
+                    break;
                 }
                 break;
             case SUM:
